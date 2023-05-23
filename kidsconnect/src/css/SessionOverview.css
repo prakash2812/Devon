@@ -1,0 +1,27 @@
+.session-header,
+.session-items,
+.seesion-unavailable {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.session-details {
+    display: flex;
+    justify-content: space-between;
+    color: maroon;
+}
+
+.session-header {
+    flex-wrap: wrap;
+}
+.session-items {
+    margin: 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.seesion-unavailable {
+    height: 60vh;
+    font-size: 40px;
+}

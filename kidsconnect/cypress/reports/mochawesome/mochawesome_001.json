@@ -1,0 +1,125 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-05-23T06:50:03.903Z",
+    "end": "2023-05-23T06:50:08.570Z",
+    "duration": 4667,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "bf26aa0b-6c8c-45b2-a6f4-e450e281355e",
+      "title": "",
+      "fullFile": "cypress\\integration\\SessionsOverview\\SessionsOverview.spec.ts",
+      "file": "cypress\\integration\\SessionsOverview\\SessionsOverview.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4df583b6-e728-4412-a376-caffc24a79bb",
+          "title": "Landing Sessions Overview",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "displays sessions for the default date",
+              "fullTitle": "Landing Sessions Overview displays sessions for the default date",
+              "timedOut": null,
+              "duration": 2069,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('div').contains('Sessions Overview');\ncy.get('button').contains('Previous day').should('be.visible');\ncy.get('button').contains('Next day').should('be.visible');\n// cy.get('div').contains('No sessions available.');",
+              "err": {},
+              "uuid": "ea7e1d68-4efb-4130-a77a-ea1a35d80916",
+              "parentUUID": "4df583b6-e728-4412-a376-caffc24a79bb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "displays sessions for the selected date",
+              "fullTitle": "Landing Sessions Overview displays sessions for the selected date",
+              "timedOut": null,
+              "duration": 1919,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('button').contains('Next day').click();\ncy.get('div').contains('Sessions Overview');\ncy.get('button').contains('Previous day').should('be.visible');\ncy.get('button').contains('Next day').should('be.visible');\n// cy.get('div').contains('No sessions available.');",
+              "err": {},
+              "uuid": "e8890410-c896-41c0-b868-4134d52738fa",
+              "parentUUID": "4df583b6-e728-4412-a376-caffc24a79bb",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ea7e1d68-4efb-4130-a77a-ea1a35d80916",
+            "e8890410-c896-41c0-b868-4134d52738fa"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3988,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

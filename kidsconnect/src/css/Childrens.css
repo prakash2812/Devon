@@ -1,0 +1,35 @@
+.childrens-container {
+    margin: auto;
+    width: 80%;
+}
+
+.childrens-headings > div {
+    font-size: 18px;
+    font-weight: bolder;
+    font-style: italic;
+    color: blueviolet;
+}
+
+.childrens-headings,
+.childrensList {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    place-items: center;
+    padding: 1rem;
+}
+.childrensList:nth-child(odd) {
+    background-color: #efefef;
+}
+.childrensList:hover {
+    color: #ffffff;
+    background-color: grey;
+    font-style: oblique;
+}
+
+.children-unavailable {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    font-size: 40px;
+}
