@@ -1,5 +1,7 @@
-import daycare1 from '../assets/daycare1.jpg';
-import daycare3 from '../assets/daycare3.jpg';
+import daycare1 from '../../assets/daycare1.jpg';
+import daycare3 from '../../assets/daycare3.jpg';
+import './Home.css';
+
 const Home = () => {
     /* Rendering Hero block images in default landing page*/
     return (
