@@ -3,13 +3,14 @@
 .seesion-unavailable {
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .session-details {
     display: flex;
     justify-content: space-between;
-    color: maroon;
+    gap: 4rem;
+    padding: 0.2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .session-header {
@@ -17,7 +18,7 @@
 }
 .session-items {
     margin: 1rem;
-    gap: 1rem;
+    gap: 2rem;
     flex-wrap: wrap;
 }
 
@@ -27,4 +28,19 @@
 }
 .session-filter {
     width: 20%;
+}
+
+.session-card.unknown-status {
+    background-color: #ff4f4f;
+    color: #fff;
+}
+
+.session-card.picked-up-status {
+    background-color: #4cff88;
+    color: #000;
+}
+
+.session-card.present-status {
+    background-color: #ffee4c;
+    color: #000;
 }
