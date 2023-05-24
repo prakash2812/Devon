@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { NewsItemProps } from '../Interface/NewsInterface';
+import { NewsItemProps } from '../../Interface/NewsInterface';
 
 const NewsItem = ({ newsItem }: NewsItemProps) => {
     const { id, title, content, author } = newsItem;
