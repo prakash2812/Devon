@@ -6,16 +6,26 @@ import { useQueryClient, useMutation, useQuery } from 'react-query';
 import { SessionInterface } from '../Interface/SessionInterface';
 import { baseAxios } from '../utils/AxiosInstance';
 import { SelectChangeEvent } from '@mui/material';
+import { useGetChildrens } from './useGetChildrens';
 
 const { SESSIONS_PATH } = SCREENS;
 
 export const useGetSessions = () => {
+    const {
+        childrens,
+        isLoading: isChildrenLoading,
+        error: childrenError,
+        isError: isChildrenError,
+    } = useGetChildrens();
+
     const navigate = useNavigate();
     const { date } = useParams();
     const queryClient = useQueryClient();
-    const [sessions, setSessions] = useState<SessionInterface[]>();
+    const [filteredSessions, setFilteredSessions] = useState<SessionInterface[]>([]);
     const [selectedGroups, setSelectedGroups] = useState<string[]>([]);
     const [listOfGroups, setListOfGroups] = useState<string[]>([]);
+    const [isFiltered, setIsFiltered] = useState<boolean>(false);
+    const [sessionsData, setSessionsData] = useState<SessionInterface[]>([]);
     const [selectedDate, setSelectedDate] = useState<string>(date ?? DEFAULT_DATE);
 
     const selectedDay = useCallback(
@@ -43,7 +53,6 @@ export const useGetSessions = () => {
     }, [navigate]);
 
     const fetchSessions = useCallback(async () => {
-        setSessions([]);
         try {
             const response = await baseAxios.get(`${SESSIONS_PATH}?day=${selectedDate}`);
             return response.data;
@@ -74,42 +83,6 @@ export const useGetSessions = () => {
             },
         },
     );
-    useEffect(() => {
-        if (!sessionsList || !sessionsList?.length) return;
-        setSessions(sessionsList);
-        const groupLists = sessionsList.map((session) => session.group.name);
-        setListOfGroups([...new Set(groupLists)]);
-    }, [sessionsList]);
-
-    useEffect(() => {
-        if (!sessionsList || !sessionsList?.length) return;
-        if (!selectedGroups.length) {
-            setSessions(sessionsList);
-            return;
-        }
-        const filterSessions = sessionsList.filter((session) => selectedGroups.includes(session.group.name));
-        setSessions(filterSessions);
-    }, [selectedGroups, sessionsList]);
-
-    const handleClearFilter = () => {
-        setSelectedGroups([]);
-        setSessions(sessionsList);
-    };
-    const handleGroupFilter = (event: SelectChangeEvent<string[]>) => {
-        const { value } = event.target;
-        value.includes('') ? handleClearFilter() : setSelectedGroups(Array.isArray(value) ? value : [value]);
-    };
-    /* useMutation(async ({ sessionId, changeStatus }: SessionUpdateStatusProps) => {
-        try {
-            await baseAxios.patch(`${SESSIONS_PATH}/${sessionId}`, {
-                presence: changeStatus,
-            });
-            // refetch();
-            queryClient.invalidateQueries('sessions');
-        } catch (error) {
-            throw new Error(`Unable to change ${changeStatus} status of child ID ${sessionId}`);
-        }
-    }) */
 
     const handleStatusChange = useCallback(
         (sessionId: number, previousStatus: string) => {
@@ -126,8 +99,61 @@ export const useGetSessions = () => {
         [onUpdateStatus],
     );
 
+    const handleClearFilter = () => {
+        setSelectedGroups([]);
+    };
+    const handleGroupFilter = (event: SelectChangeEvent<string[]>) => {
+        const { value } = event.target;
+        value.includes('') ? handleClearFilter() : setSelectedGroups(Array.isArray(value) ? value : [value]);
+    };
+
+    const allListOfGroups = () => {
+        const groupLists = sessionsData?.map((session) => session.group.name);
+        setListOfGroups([...new Set(groupLists)]);
+    };
+
+    const filteringSessions = () => {
+        if (!selectedGroups.length) {
+            setIsFiltered(false);
+            return;
+        }
+        setIsFiltered(true);
+        const filteredSessions = sessionsData?.filter((session) => selectedGroups.includes(session.group.name));
+        setFilteredSessions(filteredSessions);
+    };
+    const combinedData = useCallback((): SessionInterface[] => {
+        if (!sessionsList || !childrens) return [];
+        return sessionsList?.reduce((acc, item) => {
+            const child = childrens?.find((child) => child.id === item.child_id);
+            if (child) {
+                const { name, avatar } = child;
+                acc.push({ ...item, name, avatar });
+            }
+            return acc;
+        }, [] as SessionInterface[]);
+    }, [childrens, sessionsList]);
+
+    useEffect(() => {
+        const finalResult = combinedData();
+        setSessionsData(finalResult);
+    }, [childrens, combinedData, sessionsList]);
+    useEffect(allListOfGroups, [sessionsData]);
+    useEffect(filteringSessions, [selectedGroups, sessionsData]);
+
+    /* useMutation(async ({ sessionId, changeStatus }: SessionUpdateStatusProps) => {
+        try {
+            await baseAxios.patch(`${SESSIONS_PATH}/${sessionId}`, {
+                presence: changeStatus,
+            });
+            // refetch();
+            queryClient.invalidateQueries('sessions');
+        } catch (error) {
+            throw new Error(`Unable to change ${changeStatus} status of child ID ${sessionId}`);
+        }
+    }) */
+
     return {
-        sessions,
+        sessions: isFiltered ? filteredSessions : sessionsData,
         isLoading,
         error,
         isError,
