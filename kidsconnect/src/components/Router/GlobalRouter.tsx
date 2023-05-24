@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
-import News from '../pages/News';
-import Page404 from '../pages/Page404';
-import SessionsOverview from '../pages/SessionsOverview';
-import Childrens from '../pages/Childrens';
-import Home from '../pages/Home';
-import { SCREENS } from '../constants/appConstants';
+import Home from '../../pages/Home/Home';
+import SessionsOverview from '../../pages/SessionOverview/SessionsOverview';
+import News from '../../pages/News/News';
+import Childrens from '../../pages/Children/Childrens';
+import Page404 from '../../pages/404/Page404';
+import { SCREENS } from '../../constants/appConstants';
 
 const { HOME_PATH, SESSIONS_PATH, NEWS_PATH, POSTNEWS_PATH, CHILDREN_PATH, NOTFOUND_PATH } = SCREENS;
 const GlobalRouter = () => {
