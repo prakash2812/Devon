@@ -1,5 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { SessionFilterProps } from '../Interface/SessionInterface';
+import { SessionFilterProps } from '../../Interface/SessionInterface';
 
 const FilterSessions = ({ selectedGroups, listOfGroups, handleGroupFilter }: SessionFilterProps) => {
     return (
