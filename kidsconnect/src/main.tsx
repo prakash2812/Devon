@@ -6,11 +6,11 @@ import App from './App.tsx';
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById('root') as HTMLElement).render(
-    // <StrictMode>
-    <QueryClientProvider client={queryClient}>
-        <Router>
-            <App />
-        </Router>
-    </QueryClientProvider>,
-    // </StrictMode>,
+    <StrictMode>
+        <QueryClientProvider client={queryClient}>
+            <Router>
+                <App />
+            </Router>
+        </QueryClientProvider>
+    </StrictMode>,
 );
