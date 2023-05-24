@@ -11,13 +11,7 @@ import { useGetChildrens } from './useGetChildrens';
 const { SESSIONS_PATH } = SCREENS;
 
 export const useGetSessions = () => {
-    const {
-        childrens,
-        isLoading: isChildrenLoading,
-        error: childrenError,
-        isError: isChildrenError,
-    } = useGetChildrens();
-
+    const { childrens } = useGetChildrens();
     const navigate = useNavigate();
     const { date } = useParams();
     const queryClient = useQueryClient();
