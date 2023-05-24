@@ -106,11 +106,13 @@ since proxy has been declare "http://localhost:3001"
 
 ## initial setup
 
-yarn install or yarn
+INSTALLATION
 
-## run
-
-yarn start
+Installation steps can be crisp something like:
+kidsconnect$ yarn install
+kidsconnect$ cd service && yarn install
+kidsconnect/service$ yarn start && cd ..
+kidsconnect$ yarn start
 
 it runs vite at localhost:5173
 
