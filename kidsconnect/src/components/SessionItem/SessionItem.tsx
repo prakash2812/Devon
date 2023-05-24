@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { Card, CardContent, Typography, Button } from '@mui/material';
-import { SessionItemProps } from '../Interface/SessionInterface';
+import { SessionItemProps } from '../../Interface/SessionInterface';
 
 const SessionItem = memo(({ session, handleStatusChange }: SessionItemProps) => {
     const {
