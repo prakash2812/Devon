@@ -1,11 +1,7 @@
 import React from 'react';
-import GlobalRouter from './components/GlobalRouter';
-import Menu from './components/Menu';
-import './css/App.css';
-import './css/Home.css';
-import './css/SessionOverview.css';
-import './css/Childrens.css';
-import './css/News.css';
+import GlobalRouter from './components/Router/GlobalRouter';
+import Menu from './components/Menu/Menu';
+import './App.css';
 
 const App: React.FC = () => {
     return (
