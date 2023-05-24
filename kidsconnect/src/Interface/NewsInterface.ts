@@ -1,4 +1,3 @@
-import { SubmitHandler } from 'react-hook-form';
 import { UseMutateFunction } from 'react-query';
 
 export interface NewsInterface {
@@ -6,6 +5,7 @@ export interface NewsInterface {
     title: string;
     author: string;
     content: string;
+    date?: string;
 }
 
 export interface NewStateProps {
@@ -22,6 +22,7 @@ export interface formStateProps {
     title: string;
     author: string;
     content: string;
+    date?: string;
 }
 
 export interface NewsItemProps {

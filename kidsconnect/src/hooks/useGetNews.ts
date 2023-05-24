@@ -5,6 +5,7 @@ import { NewsInterface, formStateProps } from '../Interface/NewsInterface';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { SCREENS } from '../constants/appConstants';
 import { baseAxios } from '../utils/AxiosInstance';
+import { format } from 'date-fns';
 
 const { NEWS_PATH, NEWS_POST_PATH, POSTNEWS_PATH } = SCREENS;
 
@@ -34,6 +35,7 @@ const useGetNews = () => {
                     title,
                     author,
                     content,
+                    date: format(new Date(), 'yyyy-MM-dd HH:mm:ss a'),
                 });
             } catch (error) {
                 throw new Error('Unable To Create News');
