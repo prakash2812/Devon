@@ -1,9 +1,10 @@
 import { Typography, Button } from '@mui/material';
-import NewForm from './NewsForm';
-import useGetNews from '../hooks/useGetNews';
-import Loader from '../components/Loader';
-import ErrorMessage from '../components/ErrorMessage';
-import NewsItem from '../components/NewsItem';
+import NewForm from '../NewsForm';
+import useGetNews from '../../hooks/useGetNews';
+import Loader from '../../components/Loader/Loader';
+import ErrorMessage from '../../components/Error/ErrorMessage';
+import NewsItem from '../../components/NewsItem/NewsItem';
+import './News.css';
 
 const News = () => {
     /* To simplify code and readability, customs hooks are written only callaback or refrences or values can be used */
