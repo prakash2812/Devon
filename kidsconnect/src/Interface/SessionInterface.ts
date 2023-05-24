@@ -6,6 +6,8 @@ export interface SessionInterface {
     end_time: string;
     product_name: string;
     child_id: number;
+    name: string;
+    avatar: string;
     group: {
         id: number;
         name: string;
