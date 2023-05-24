@@ -1,10 +1,11 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 import { DEFAULT_DATE, SCREENS } from '../constants/appConstants';
 import { useQueryClient, useMutation, useQuery } from 'react-query';
 import { SessionInterface } from '../Interface/SessionInterface';
 import { baseAxios } from '../utils/AxiosInstance';
+import { SelectChangeEvent } from '@mui/material';
 
 const { SESSIONS_PATH } = SCREENS;
 
@@ -12,6 +13,9 @@ export const useGetSessions = () => {
     const navigate = useNavigate();
     const { date } = useParams();
     const queryClient = useQueryClient();
+    const [sessions, setSessions] = useState<SessionInterface[]>();
+    const [selectedGroups, setSelectedGroups] = useState<string[]>([]);
+    const [listOfGroups, setListOfGroups] = useState<string[]>([]);
     const [selectedDate, setSelectedDate] = useState<string>(date ?? DEFAULT_DATE);
 
     const selectedDay = useCallback(
@@ -39,6 +43,7 @@ export const useGetSessions = () => {
     }, [navigate]);
 
     const fetchSessions = useCallback(async () => {
+        setSessions([]);
         try {
             const response = await baseAxios.get(`${SESSIONS_PATH}?day=${selectedDate}`);
             return response.data;
@@ -48,7 +53,7 @@ export const useGetSessions = () => {
     }, [selectedDate]);
 
     const {
-        data: sessions,
+        data: sessionsList,
         isLoading,
         error,
         isError,
@@ -69,7 +74,31 @@ export const useGetSessions = () => {
             },
         },
     );
+    useEffect(() => {
+        if (!sessionsList || !sessionsList?.length) return;
+        setSessions(sessionsList);
+        const groupLists = sessionsList.map((session) => session.group.name);
+        setListOfGroups([...new Set(groupLists)]);
+    }, [sessionsList]);
 
+    useEffect(() => {
+        if (!sessionsList || !sessionsList?.length) return;
+        if (!selectedGroups.length) {
+            setSessions(sessionsList);
+            return;
+        }
+        const filterSessions = sessionsList.filter((session) => selectedGroups.includes(session.group.name));
+        setSessions(filterSessions);
+    }, [selectedGroups, sessionsList]);
+
+    const handleClearFilter = () => {
+        setSelectedGroups([]);
+        setSessions(sessionsList);
+    };
+    const handleGroupFilter = (event: SelectChangeEvent<string[]>) => {
+        const { value } = event.target;
+        value.includes('') ? handleClearFilter() : setSelectedGroups(Array.isArray(value) ? value : [value]);
+    };
     /* useMutation(async ({ sessionId, changeStatus }: SessionUpdateStatusProps) => {
         try {
             await baseAxios.patch(`${SESSIONS_PATH}/${sessionId}`, {
@@ -103,9 +132,12 @@ export const useGetSessions = () => {
         error,
         isError,
         selectedDate,
+        listOfGroups,
+        selectedGroups,
         handleDefaultDay,
         handlePreviousDay,
         handleNextDay,
         handleStatusChange,
+        handleGroupFilter,
     };
 };

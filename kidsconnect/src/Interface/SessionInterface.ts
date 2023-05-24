@@ -1,3 +1,5 @@
+import { SelectChangeEvent } from '@mui/material';
+
 export interface SessionInterface {
     id: number;
     start_time: string;
@@ -23,4 +25,10 @@ export interface SessionStateProps {
 export interface SessionItemProps {
     session: SessionInterface;
     handleStatusChange: (sessionId: number, changeStatus: string) => void;
+}
+
+export interface SessionFilterProps {
+    selectedGroups: string[];
+    listOfGroups: string[];
+    handleGroupFilter: (event: SelectChangeEvent<string[]>) => void;
 }

@@ -3,6 +3,7 @@ import SessionItem from '../components/SessionItem';
 import { useGetSessions } from '../hooks/useGetSessions';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
+import FilterSessions from '../components/FilterSessions';
 
 const SessionsOverview = () => {
     /* To simplify code and readability, customs hooks are written only callaback or refrences or values can be used */
@@ -12,12 +13,20 @@ const SessionsOverview = () => {
         error,
         isError,
         selectedDate,
+        listOfGroups,
+        selectedGroups,
         handleDefaultDay,
         handlePreviousDay,
         handleNextDay,
         handleStatusChange,
+        handleGroupFilter,
     } = useGetSessions();
 
+    const filterSessionProps = {
+        listOfGroups,
+        selectedGroups,
+        handleGroupFilter,
+    };
     /* Incase API takes long time to response,showing Loader Component as fallback UI */
     if (isLoading) return <Loader />;
     /* Incase API failed with any error, showing Error Component as fallback UI */
@@ -36,6 +45,7 @@ const SessionsOverview = () => {
                 <Button variant="outlined" onClick={handleNextDay} sx={{ margin: '.6rem' }}>
                     Next day
                 </Button>
+                <FilterSessions {...filterSessionProps} />
             </div>
             <div className="session-items">
                 {sessions && sessions?.length > 0 ? (
