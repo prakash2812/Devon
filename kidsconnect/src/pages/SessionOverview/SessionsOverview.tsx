@@ -1,9 +1,10 @@
 import { Typography, Button } from '@mui/material';
-import SessionItem from '../components/SessionItem';
-import { useGetSessions } from '../hooks/useGetSessions';
-import Loader from '../components/Loader';
-import ErrorMessage from '../components/ErrorMessage';
-import FilterSessions from '../components/FilterSessions';
+import SessionItem from '../../components/SessionItem/SessionItem';
+import { useGetSessions } from '../../hooks/useGetSessions';
+import Loader from '../../components/Loader/Loader';
+import ErrorMessage from '../../components/Error/ErrorMessage';
+import FilterSessions from '../../components/FilterSessions/FilterSessions';
+import './SessionOverview.css';
 
 const SessionsOverview = () => {
     /* To simplify code and readability, customs hooks are written only callaback or refrences or values can be used */
