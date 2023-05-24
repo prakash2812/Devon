@@ -1,7 +1,8 @@
-import { useGetChildrens } from '../hooks/useGetChildrens';
-import Loader from '../components/Loader';
-import ErrorMessage from '../components/ErrorMessage';
+import { useGetChildrens } from '../../hooks/useGetChildrens';
+import Loader from '../../components/Loader/Loader';
+import ErrorMessage from '../../components/Error/ErrorMessage';
 import { Avatar, Typography } from '@mui/material';
+import './Childrens.css';
 
 const Childrens = () => {
     /* To simplify code and readability, customs hooks are written so only callaback or refrences or values can be used */
