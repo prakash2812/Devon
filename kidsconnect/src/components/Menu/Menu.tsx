@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { SCREENS } from '../constants/appConstants';
+import { SCREENS } from '../../constants/appConstants';
 
 const { SESSIONS_PATH, HOME_PATH, CHILDREN_PATH, NEWS_PATH } = SCREENS;
 const menuLists = [
